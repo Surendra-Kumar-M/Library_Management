@@ -22,4 +22,5 @@ from books.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/',ReactView.as_view(),name='testing'),
+    path('api-auth/', include('rest_framework.urls')),
 ]
