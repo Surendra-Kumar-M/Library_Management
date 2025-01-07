@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Library Management System</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Library</h1>
+            {% if member %}
+                <p>Welcome, {{ users.username }} ({{ member.membership_type }} member)</p>
+            {% else %}
+                <p>Welcome, Guest</p>
+            {% endif %}
+            <a href="{% url 'logout' %}">Logout</a>
+        </header>
+
+        <section class="available-books">
+            <h2>Available Books</h2>
+            {% if available_books %}
+                <ul>
+                    {% for book in available_books %}
+                        <li>
+                            <strong>{{ book.title }}</strong><br>
+                            Author: {{ book.author }}<br>
+                            Genre: {{ book.get_genre_display }}<br>
+                            Year: {{ book.publication_year }}<br>
+                            Rating: {{ book.get_rating_display }}<br>
+                            Available Copies: {{ book.available_copies }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No books available at the moment.</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
